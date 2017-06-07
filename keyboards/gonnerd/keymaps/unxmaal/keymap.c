@@ -5,6 +5,7 @@
 #define FUNCTION_LAYER 1
 #define SYSTEM_LAYER 2
 
+
 // Key aliases
 #define __x__ KC_NO
 
@@ -20,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |-----------------------------------------------------------------------------|
    * |Shift      |    Z|     X|    C|     V|  B|  N|  M|  ,|  .|  /|     Shift     |
    * |-----------------------------------------------------------------------------|
-   * |Fn|Alt |Gui | Space(tapped), Fn(held) |Gui |Alt  |Menu(tapped, Fn2(held)|Ctrl|
+   * |Fn|Alt |Gui | Space(tapped), Fn(held) |Gui |Alt  |Menu(tapped, Fn2(held)LT(SYSTEM_LAYER,KC_MENU)|Ctrl|
    * `-----------------------------------------------------------------------------'
    */
   [BASE_LAYER] = KEYMAP_60(
@@ -28,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,   KC_Q,     KC_W,     KC_E,    KC_R,     KC_T,     KC_Y,     KC_U,    KC_I,    KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS, \
       KC_LCTL,    KC_A,     KC_S,     KC_D,    KC_F,     KC_G,     KC_H,     KC_J,    KC_K,    KC_L,     KC_SCLN,  KC_QUOT,  __x__,    KC_ENT,  \
       KC_LSFT,  __x__,    KC_Z,     KC_X,     KC_C,    KC_V,     KC_B,     KC_N,    KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT,  __x__,   \
-      MO(FUNCTION_LAYER),  KC_LALT,  KC_LGUI,      LT(FUNCTION_LAYER,KC_SPACE),           KC_RGUI,  KC_RALT,  LT(SYSTEM_LAYER,KC_MENU),    KC_RCTL  \
+      MO(FUNCTION_LAYER),  KC_LALT,  KC_LGUI,      LT(FUNCTION_LAYER,KC_SPACE),           KC_RGUI,  KC_RALT,  MO(SYSTEM_LAYER),    KC_RCTL  \
   ),
 
    /*
@@ -57,18 +58,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------.
    * |   |   |   |   |   |   |   |   |   |   |   |   |   |  RESET|
    * |-----------------------------------------------------------|
-   * |     |   |   |   |   |   |   |   |   |   |   |BL-|BL+|BL   |
+   * |  | BL-| BL+| RGB on | UG-| UG+ | |  |  |   |   |  |  |    |
    * |-----------------------------------------------------------|
    * |      |   |   |   |   |   |   |       |   |   |   |        |
    * |-----------------------------------------------------------|
-   * |  | RGB on|RGB step|Hue+|Hue- |Sat+|Sat-|Val+| Val-| | |   |
+   * |  |   |   |  |   |  |  |  |  | | |   |
    * |-----------------------------------------------------------|
    * |    |    |    |                        |    |    |    |    |
    * `-----------------------------------------------------------'
    */
   [SYSTEM_LAYER] = KEYMAP_60(
       __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,   RESET, \
-      __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,   __x__, \
+      __x__,  BL_DEC, BL_INC, BL_TOGG,  M(1),   M(0),  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,   __x__, \
       __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,   __x__, \
       __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,  __x__,   __x__, \
       __x__,  __x__,  __x__,                          __x__,                          __x__,  __x__,  KC_TRNS, __x__  \
@@ -108,3 +109,21 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
       break;
   }
 }
+
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
+    switch(id) {
+      case 0:
+          if (record->event.pressed)
+          {
+              PORTB |= (1<<6);
+          }
+          break;
+      case 1:
+          if (record->event.pressed)
+          {
+              PORTB &= ~(1<<6);
+          }
+          break;
+    }
+    return MACRO_NONE;
+};

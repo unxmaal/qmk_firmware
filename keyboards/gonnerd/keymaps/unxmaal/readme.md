@@ -1,5 +1,20 @@
-# Mauin's keymap for the GON NerD
+Unxmaal's GON Nerd60 Layout
+=====================
 
-This layout is based on a Pok3r style layout with a standard base layer.
+##Quantum MK Firmware
+For the full Quantum feature list, see the parent readme.md.
 
-Function layers provide access to navigation and media keys.
+* Standard Mac ANSI layout
+* Spacebar acts as space when tapped, Fn when held
+* Menu acts as menu when tapped, Fn2 when held
+* ESC will behave like the ` key, if "left cmd" is held first. This is helpful to switch between application windows in OS X.
+* Layer1:
+  * Top row = `~, F1-F12, Del
+  * JKIL = arrow cluster
+* Layer2:
+  * Top row = media controls
+  * JKIL = PgDn/Up/Home/Insert
+  * Backspace = Reset
+
+### Additional Credits
+Keymap has been based on various keymaps available from the QMK Repo for the GH60-SATAN and KC60 keyboards.

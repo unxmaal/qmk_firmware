@@ -18,6 +18,7 @@
 /* backlight */
 #define BACKLIGHT_PIN B7
 #define BACKLIGHT_LEVELS 3
+#define RGBLED_NUM 8     // Number of LEDs
 
 /* matrix pins */
 #define MATRIX_ROW_PINS { B4, E2, F4, F7, F1, F6, C6, F5, D7, C7 }
