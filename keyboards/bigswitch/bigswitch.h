@@ -1,5 +1,5 @@
-#ifndef KB_H
-#define KB_H
+#ifndef BIGSWITCH_H
+#define BIGSWITCH_H
 
 #include "quantum.h"
 
