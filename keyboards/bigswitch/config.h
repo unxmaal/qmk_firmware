@@ -3,6 +3,13 @@
 
 #include "config_common.h"
 
+#define RGB_DI_PIN D1
+#define RGBLIGHT_ANIMATIONS
+#define RGBLED_NUM 21
+#define RGBLIGHT_HUE_STEP 10
+#define RGBLIGHT_SAT_STEP 2
+#define RGBLIGHT_VAL_STEP 17
+
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x6060
@@ -47,14 +54,4 @@
 
 /* prevent stuck modifiers */
 #define PREVENT_STUCK_MODIFIERS
-
-#define RGB_DI_PIN D1
-#ifdef RGB_DI_PIN
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 24
-#define RGBLIGHT_HUE_STEP 10
-#define RGBLIGHT_SAT_STEP 2
-#define RGBLIGHT_VAL_STEP 17
-#endif
-
 #endif
